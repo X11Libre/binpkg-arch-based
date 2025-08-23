@@ -1,5 +1,9 @@
 Arch based Xlibre binary packages repository
---------------------------------------------
+============================================
+
+
+Adding the repository
+---------------------
 
 This repository can be enabled with the following actions:
 
@@ -13,6 +17,9 @@ This repository can be enabled with the following actions:
   `# List of available packages: https://github.com/artist4xlibre/packages-arch-based`
 
 
+Installation procedure
+----------------------
+
 Attention: when migrating from Xorg package xlibre-input-libinputi-bin needs to be installed together with xlibre-server-bin and xlibre-server-common-bin.   
    The installation requires via pacman that for any currently installed xf86-(input/video) driver package the corresponding xlibre-(input/video) package needs to be installed.
 
@@ -22,13 +29,13 @@ This will have pacman automatically remove the xorg/xf86 packages.
 
 
 TearFree option
-===============
+---------------
 
 Xlibre has the 'TearFree' option enabled by default, while Xorg does not.
 
 
 Closed source drivers
-=====================
+---------------------
 
 Closed source drivers might not yet have an updated ABI version to match that of the updated xlibre-xserver.   
 This can be overcome by creating a file named eg. /etc/X11/xorg.conf.d/xlibre.conf containing:
