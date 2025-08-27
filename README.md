@@ -14,7 +14,7 @@ This repository can be enabled with the following actions:
 * Add the xlibre repository by adding this section to file /etc/pacman.conf:\
   `[xlibre]`\
   `Server = https://github.com/X11Libre/binpkg-arch-based/raw/refs/heads/main/`\
-  `# List of available packages: https://github.com/artist4xlibre/packages-arch-based`
+  `# List of available packages: https://github.com/X11Libre/binpkg-arch-based/`
 
 
 Installation procedure
@@ -40,9 +40,9 @@ Closed source drivers
 Closed source drivers might not yet have an updated ABI version to match that of the updated xlibre-xserver.   
 This can be overcome by creating a file named eg. /etc/X11/xorg.conf.d/xlibre.conf containing:
 
-    `Section "ServerFlags"`\
-    `    Option "IgnoreABI" "true"`\
-    `EndSection`
+    Section "ServerFlags"
+        Option "IgnoreABI" "true"
+    EndSection
 
 
 \
