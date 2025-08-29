@@ -2,16 +2,20 @@
 
 # Maintainer : artist for XLibre
 # Script     : install-xlibre.sh
-# Version    : 0.2
+# Version    : 0.2.1
 # Repository : To be used only together with the XLibre binary arch repo:
-#                 https://github.com/X11Libre/binpkg-arch-based
-
-# To run this script:
-# - save it as file: install-xlibre.sh
-# - run command: chmod +x install-xlibre.sh
-# - run command: ./install-xlibre.sh
+#                https://github.com/X11Libre/binpkg-arch-based
 
 # Note: this script requires 'sudo' to perform the installation
+
+#############################################
+#                                           #
+# To run this script:                       #
+# - save it as file: install-xlibre.sh      #
+# - run command: chmod +x install-xlibre.sh #
+# - run command: ./install-xlibre.sh        #
+#                                           #
+#############################################
 
 if ! pacman-key -f 73580DE2EDDFA6D6  1> /dev/null 2>&1 ; then
   printf '\n'
