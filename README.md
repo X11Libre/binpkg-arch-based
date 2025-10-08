@@ -1,3 +1,12 @@
+This repository has been moved!!!
+=================================
+
+New location: https://x11libre.net/repo/arch_based/x86_64/
+==========================================================
+
+Make sure to update your /etc/pacman.conf file
+----------------------------------------------
+
 Arch based Xlibre binary packages repository
 ============================================
 
@@ -13,8 +22,7 @@ This repository can be enabled with the following actions:
   `sudo pacman-key --lsign-key 73580DE2EDDFA6D6`
 * Add the xlibre repository by adding this section to file /etc/pacman.conf:\
   `[xlibre]`\
-  `Server = https://github.com/X11Libre/binpkg-arch-based/raw/refs/heads/main/`\
-  `# List of available packages: https://github.com/X11Libre/binpkg-arch-based/`
+  `Server = https://x11libre.net/repo/arch_based/x86_64/`
 
 
 Installation procedure
