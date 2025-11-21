@@ -1,0 +1,97 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
+		<title>XLibre x86_64 binary packages for Arch-based systems</title>
+		<meta name="color-scheme" content="light dark">
+        <link rel="stylesheet" href="github-markdown.css">
+		<!-- <link rel="stylesheet" href="DefaultCSS_Markdown.css"> -->
+		<style>
+			body {
+				box-sizing: border-box;
+				min-width: 200px;
+				max-width: 980px;
+				margin: 0 auto;
+				padding: 45px;
+			}
+
+			@media (prefers-color-scheme: dark) {
+				body {
+					background-color: #0d1117;
+				}
+			}
+		</style>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.2.3/gh-fork-ribbon.min.css">
+		<style>
+			.github-fork-ribbon:before {
+				background-color: #121612;
+			}
+		</style>
+	</head>
+	<body>
+		<article class="markdown-body">
+
+<h1>XLibre x86_64 binary packages for Arch-based systems</h1>
+<p>This repository provides <a href="https://github.com/X11Libre">XLibre</a> x86_64 binary <a href="https://wiki.archlinux.org/title/Unofficial_user_repositories">third-party</a> packages for <a href="https://archlinux.org">Arch Linux</a>-based distributions. The primary location is <a href="https://x11libre.net/repo/arch_based/x86_64">https://x11libre.net/repo/arch_based/x86_64</a>. It is known to work with <a href="https://archlinux.org">Arch Linux</a>, <a href="https://archcraft.io">ArchCraft</a>, <a href="https://cachyos.org">CachyOS</a>, <a href="https://endeavouros.com">EndeavourOS</a>, <a href="https://garudalinux.org">Garuda Linux</a>, <a href="https://manjaro.org">Manjaro Linux</a>, <a href="https://rebornos.org">RebornOS</a>, and <a href="https://store.steampowered.com/steamos">SteamOS for PC</a> up to version 3.8.</p>
+<h2>Installing XLibre via Shell Script</h2>
+<p>There is a shell script <a href="https://x11libre.net/repo/arch_based/x86_64/install-xlibre.sh"><code>install-xlibre.sh</code></a> that guides you through the installation process and switching to XLibre. You can download and run it at the command line with either <a href="https://curl.se"><code>curl</code></a>:</p>
+<pre><code class="language-shell">sh -c &quot;$(curl -fsSL https://x11libre.net/repo/arch_based/x86_64/install-xlibre.sh)&quot;
+</code></pre>
+<p>or <a href="https://www.gnu.org/software/wget"><code>wget</code></a>:</p>
+<pre><code class="language-shell">sh -c &quot;$(wget https://x11libre.net/repo/arch_based/x86_64/install-xlibre.sh -O -)&quot;
+</code></pre>
+<h2>Installing XLibre Manually</h2>
+<h3>Adding the Public Package Signing Key to pacman</h3>
+<p>Add the public package signing key of the <a href="https://wiki.archlinux.org/title/OpenPGP">OpenPGP</a> key used to <a href="https://wiki.archlinux.org/title/Pacman/Package_signing">sign the packages</a> of this repository to the pacman keyring:</p>
+<pre><code class="language-shell">sudo pacman-key --recv-keys 73580DE2EDDFA6D6
+sudo pacman-key --finger 73580DE2EDDFA6D6
+sudo pacman-key --lsign-key 73580DE2EDDFA6D6
+</code></pre>
+<p>In case the above <code>pacman-key</code> commands fail, you can manually add the public key with either <code>curl</code>:</p>
+<pre><code class="language-shell">sudo sh -c 'curl -sS https://x11libre.net/repo/arch_based/x86_64/0x73580DE2EDDFA6D6.gpg | gpg --import -'
+</code></pre>
+<p>or <code>wget</code>:</p>
+<pre><code class="language-shell">sudo sh -c 'wget https://x11libre.net/repo/arch_based/x86_64/0x73580DE2EDDFA6D6.gpg -O - | gpg --import -'
+</code></pre>
+<h3>Adding the Repository to Pacman</h3>
+<p>Once you retrieved the public key, add an entry for the XLibre repository by adding this section to the file <code>/etc/pacman.conf</code>:</p>
+<pre><code class="language-ini">[xlibre]
+Server = https://x11libre.net/repo/arch_based/x86_64
+</code></pre>
+<h3>Installing the XLibre Xserver and Drivers</h3>
+<p>There are two ways to install XLibre depending on whether the X.Org Server and its drivers are already installed on your system or not. In both cases you first need to install the <code>xlibre-server</code> and <code>xlibre-input-libinput</code> packages:</p>
+<pre><code class="language-shell">pacman -S xlibre-server xlibre-input-libinput
+</code></pre>
+<p>These packages will replace their X.Org counterparts. After doing so, use one of the two methods as follows.</p>
+<h4>Migrating from X.Org to XLibre</h4>
+<p>For migrating from X.Org to XLibre, you need to search for any installed X.Org driver packages and replace them with their XLibre counterparts:</p>
+<pre><code class="language-shell">pacman -Q | grep '^xorg-server-\|^xf86' | cut -d' ' -f1 | \
+	sed 's/^xorg-server-/xlibre-xserver-/' | \
+	sed 's/^xf86-/xlibre-/' | xargs -ro pacman -Syy
+</code></pre>
+<p>The above command queries <code>pacman</code> for any installed packages having <code>xf86-</code> in their name, replaces the <code>xf86-</code> prefix with <code>xlibre-</code>, and installs the XLibre counterparts. For example, an installed package <code>xf86-video-amdgpu</code> would be replaced by <code>xlibre-video-amdgpu</code>. By installing the <code>xlibre-</code> packages, the old <code>xf86-</code> packages will be removed automatically.</p>
+<h4>Installing XLibre On A Non-X.Org System</h4>
+<p>To install XLibre on a non-X.Org system, first install <code>xlibre-server</code> and <code>xlibre-input-libinput</code> as shown above. Then list the PCI VGA controllers on your machine via <code>lspci</code> and look for the appropriate drivers in the list of available XLibre video drivers:</p>
+<pre><code class="language-shell">lspci -v -nn -d ::03xx
+pacman -Ss xlibre-video
+</code></pre>
+<p>Please see the <a href="https://wiki.archlinux.org/title/Xorg#Driver_installation">Driver Installation - Xorg - ArchWiki</a> for more details. Additionally, some packages from the <a href="https://archlinux.org/groups/x86_64/xorg-apps/">xorg-apps</a> group are necessary for certain configuration tasks. They are pointed out in the relevant sections of <a href="https://wiki.archlinux.org/title/Xorg#Configuration">Configuration - Xorg - ArchWiki</a>.</p>
+<h2>TearFree Option</h2>
+<p>XLibre has the 'TearFree' option enabled by default since <a href="https://github.com/X11Libre/xserver/commit/0dacee6c5149b63a563e9bed63502da2e9f1ac1f">commit 0dacee6</a>, while Xorg does not.</p>
+<h2>Closed-Source Drivers</h2>
+<p>Closed-source drivers might not yet have an updated ABI version to match that of the updated XLibre Xserver.
+This can be overcome by creating a file named, e.g., <code>/etc/X11/xorg.conf.d/xlibre.conf</code> containing:</p>
+<pre><code class="language-conf">Section &quot;ServerFlags&quot;
+    Option &quot;IgnoreABI&quot; &quot;true&quot;
+EndSection
+</code></pre>
+<p>For more information, please see the <a href="https://github.com/X11Libre/xserver/wiki/Compatibility-of-XLibre#nvidia-proprietary-driver">Nvidia proprietary driver</a> section of <a href="https://github.com/X11Libre/xserver/wiki/Compatibility-of-XLibre">Compatibility of XLibre · X11Libre/xserver Wiki</a>.</p>
+<h2>Contact</h2>
+<p>Please report any issues with this repository at <a href="https://github.com/X11Libre/binpkg-arch-based/issues">Issues · X11Libre/binpkg-arch-based</a>. In case you need help, want to report success or talk about other aspects of the build, just go to <a href="https://github.com/X11Libre/packaging/discussions/categories/xlibre-on-arch-linux">X11Libre/packaging: XLibre On Arch Linux · Discussions · GitHub</a>.</p>
+<p><em>artist for Xlibre</em> (artist4xlibre at proton dot me)</p>
+
+        </article>
+		<a class="github-fork-ribbon" href="https://github.com/X11Libre/binpkg-arch-based" data-ribbon="Fork me on GitHub" title="Fork me on GitHub">Fork me on GitHub</a>
+	</body>
+</html>
