@@ -1,4 +1,4 @@
-# XLibre x86_64 binary packages for Arch-based systems
+# XLibre x86_64 binary packages for Arch-based systems - https://x11libre.net/repo/arch_based
 
 This repository provides [XLibre](https://github.com/X11Libre) x86_64 binary [third-party](https://wiki.archlinux.org/title/Unofficial_user_repositories) packages for [Arch Linux](https://archlinux.org)-based distributions. The primary location is [https://x11libre.net/repo/arch_based/x86_64](https://x11libre.net/repo/arch_based/x86_64). It is known to work with [Arch Linux](https://archlinux.org), [ArchCraft](https://archcraft.io), [CachyOS](https://cachyos.org), [EndeavourOS](https://endeavouros.com), [Garuda Linux](https://garudalinux.org), [Manjaro Linux](https://manjaro.org), [RebornOS](https://rebornos.org), and [SteamOS for PC](https://store.steampowered.com/steamos) up to version 3.8.
 
