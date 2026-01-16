@@ -2,6 +2,13 @@
 
 This repository provides [XLibre](https://github.com/X11Libre) x86_64 binary [third-party](https://wiki.archlinux.org/title/Unofficial_user_repositories) packages for [Arch Linux](https://archlinux.org)-based distributions. The primary location is [https://x11libre.net/repo/arch_based/x86_64](https://x11libre.net/repo/arch_based/x86_64). It is known to work with [Arch Linux](https://archlinux.org), [ArchCraft](https://archcraft.io), [CachyOS](https://cachyos.org), [EndeavourOS](https://endeavouros.com), [Garuda Linux](https://garudalinux.org), [Manjaro Linux](https://manjaro.org), [RebornOS](https://rebornos.org), and [SteamOS for PC](https://store.steampowered.com/steamos) up to version 3.8.
 
+Note: xlibre-xserver 25.1.0 is still in Beta, so not the main repository. However, it is available for testing on the same site and can be added to pacman.conf using:
+
+```
+[xlibre-beta]
+Server = https://x11libre.net/repo/arch_based/x86_64/xlibre-beta
+```
+
 ## Installing XLibre via Shell Script
 
 There is a shell script [`install-xlibre.sh`](https://x11libre.net/repo/arch_based/x86_64/install-xlibre.sh) that guides you through the installation process and switching to XLibre. You can download and run it at the command line with either [`curl`](https://curl.se):
